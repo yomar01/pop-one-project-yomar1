@@ -9,14 +9,28 @@ def read_cities(file_name):
 
       Alabama -> Alaska -> Arizona -> ... -> Wyoming -> Alabama.
     """
-    pass
-  
+    s = input("Please enter the file name: ")
+    file = open(s, 'r')
+
+    roadmap = list()
+
+    for line in file:
+        tp = tuple(line.split())
+        roadmap.append(tp)
+    
+    return roadmap
+
+
+
 def print_cities(road_map):
+    
+    
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
     """
     pass
+
 
 def compute_total_distance(road_map):
     """
@@ -25,6 +39,7 @@ def compute_total_distance(road_map):
     (for example) in the initial `road_map`, Wyoming connects to Alabama...
     """
     return 6.55
+
 
 def swap_cities(road_map, index1, index2):
     """
@@ -37,7 +52,8 @@ def swap_cities(road_map, index1, index2):
     Allow for the possibility that `index1=index2`,
     and handle this case correctly.
     """
-    return ('x','y')
+    return ('x', 'y')
+
 
 def shift_cities(road_map):
     """
@@ -45,10 +61,11 @@ def shift_cities(road_map):
     to the position i+1. The city at the last position moves to the position
     0. Return the new road map. 
     """
-    road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311), \
-                 ("Delaware", "Dover", 39.161921, -75.526755), \
+    road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311),
+                 ("Delaware", "Dover", 39.161921, -75.526755),
                  ("Minnesota", "Saint Paul", 44.95, -93.094)]
     return road_map1
+
 
 def find_best_cycle(road_map):
     """
@@ -59,6 +76,7 @@ def find_best_cycle(road_map):
     """
     pass
 
+
 def print_map(road_map):
     """
     Prints, in an easily understandable format, the cities and 
@@ -67,6 +85,7 @@ def print_map(road_map):
     """
     pass
 
+
 def main():
     """
     Reads in, and prints out, the city data, then creates the "best"
@@ -74,5 +93,9 @@ def main():
     """
     pass
 
-if __name__ == "__main__": #keep this in
+
+if __name__ == "__main__":  # keep this in
     main()
+
+
+print(read_cities("city-data.txt"))

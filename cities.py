@@ -9,15 +9,19 @@ def read_cities(file_name):
 
       Alabama -> Alaska -> Arizona -> ... -> Wyoming -> Alabama.
     """
-    s = input("Please enter the file name: ")
-    file = open(s, 'r')
+
+    file = open(file_name, 'r')
+    
 
     roadmap = list()
 
     for line in file:
-        tp = tuple(line.split())
+        line = line.strip()
+        line = line.split('\t')
+        city, state, lon, lat = line
+        tp = (state, city, float(lon), float(lat))
         roadmap.append(tp)
-    
+
     return roadmap
 
 
@@ -79,6 +83,7 @@ def find_best_cycle(road_map):
 
 def print_map(road_map):
     """
+
     Prints, in an easily understandable format, the cities and 
     their connections, along with the cost for each connection 
     and the total cost.

@@ -11,7 +11,6 @@ def read_cities(file_name):
     """
 
     file = open(file_name, 'r')
-    
 
     roadmap = list()
 
@@ -24,16 +23,19 @@ def read_cities(file_name):
 
     return roadmap
 
-
-
 def print_cities(road_map):
-    
-    
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
     """
-    pass
+    
+    lst = []
+    
+    for element in road_map:
+        city, lon, lat = element[1], element[2], element[3]
+        lon, lat = round(lon, 2), round(lat, 2)
+        lst.extend([city, lon, lat])
+    print(lst)
 
 
 def compute_total_distance(road_map):
@@ -42,7 +44,7 @@ def compute_total_distance(road_map):
     the connections in the `road_map`. Remember that it's a cycle, so that 
     (for example) in the initial `road_map`, Wyoming connects to Alabama...
     """
-    return 6.55
+    return
 
 
 def swap_cities(road_map, index1, index2):
@@ -103,4 +105,7 @@ if __name__ == "__main__":  # keep this in
     main()
 
 
-print(read_cities("city-data.txt"))
+
+data = read_cities('city-data.txt')
+
+print_cities(data)

@@ -46,12 +46,13 @@ def compute_total_distance(road_map):
     the connections in the `road_map`. Remember that it's a cycle, so that 
     (for example) in the initial `road_map`, Wyoming connects to Alabama...
     """
+    
     total_distance = 0
 
     for i in range(0, len(road_map)-1):
-        total_distance += sqrt((road_map[i][2]-road_map[i][3])**2 + (road_map[i+1][2]-road_map[i+1][3])**2)
+        total_distance += sqrt((road_map[i][2]-road_map[i+1][2])**2 + (road_map[i][3]-road_map[i+1][3])**2)
 
-    total_distance += sqrt((road_map[49][2]-road_map[49][3])**2 + (road_map[0][2]-road_map[0][3])**2)
+    total_distance += sqrt((road_map[49][2]-road_map[0][2])**2 + (road_map[49][3]-road_map[0][3])**2)
 
     return total_distance
 
@@ -67,8 +68,12 @@ def swap_cities(road_map, index1, index2):
     Allow for the possibility that `index1=index2`,
     and handle this case correctly.
     """
-    pass
+    road_map[index1],road_map[index2] = road_map[index2],road_map[index1]
+    return (road_map, compute_total_distance(road_map))
 
+data = read_cities('city-data.txt')
+
+print(swap_cities(data,49,2))
 
 def shift_cities(road_map):
     """
@@ -115,7 +120,7 @@ if __name__ == "__main__":  # keep this in
 
 
 
-data = read_cities('city-data.txt')
 
 
-print(compute_total_distance(data))
+
+

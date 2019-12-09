@@ -1,3 +1,5 @@
+from math import sqrt
+
 def read_cities(file_name):
     """
     Read in the cities from the given `file_name`, and return 
@@ -44,7 +46,14 @@ def compute_total_distance(road_map):
     the connections in the `road_map`. Remember that it's a cycle, so that 
     (for example) in the initial `road_map`, Wyoming connects to Alabama...
     """
-    return
+    total_distance = 0
+
+    for i in range(0, len(road_map)-1):
+        total_distance += sqrt((road_map[i][2]-road_map[i][3])**2 + (road_map[i+1][2]-road_map[i+1][3])**2)
+
+    total_distance += sqrt((road_map[49][2]-road_map[49][3])**2 + (road_map[0][2]-road_map[0][3])**2)
+
+    return total_distance
 
 
 def swap_cities(road_map, index1, index2):
@@ -58,7 +67,7 @@ def swap_cities(road_map, index1, index2):
     Allow for the possibility that `index1=index2`,
     and handle this case correctly.
     """
-    return ('x', 'y')
+    pass
 
 
 def shift_cities(road_map):
@@ -108,4 +117,5 @@ if __name__ == "__main__":  # keep this in
 
 data = read_cities('city-data.txt')
 
-print_cities(data)
+
+print(compute_total_distance(data))

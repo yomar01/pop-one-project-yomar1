@@ -117,4 +117,4 @@ if __name__ == "__main__":  # keep this in
 
 data = read_cities('city-data.txt')
 
-print(swap_cities(data,49,2))
+print(swap_cities(data,49,1))

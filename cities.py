@@ -71,10 +71,6 @@ def swap_cities(road_map, index1, index2):
     road_map[index1],road_map[index2] = road_map[index2],road_map[index1]
     return (road_map, compute_total_distance(road_map))
 
-data = read_cities('city-data.txt')
-
-print(swap_cities(data,49,2))
-
 def shift_cities(road_map):
     """
     For every index i in the `road_map`, the city at the position i moves
@@ -119,8 +115,6 @@ if __name__ == "__main__":  # keep this in
     main()
 
 
+data = read_cities('city-data.txt')
 
-
-
-
-
+print(swap_cities(data,49,2))

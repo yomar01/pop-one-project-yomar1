@@ -52,7 +52,7 @@ def compute_total_distance(road_map):
     for i in range(0, len(road_map)-1):
         total_distance += sqrt((road_map[i][2]-road_map[i+1][2])**2 + (road_map[i][3]-road_map[i+1][3])**2)
 
-    total_distance += sqrt((road_map[49][2]-road_map[0][2])**2 + (road_map[49][3]-road_map[0][3])**2)
+    total_distance += sqrt((road_map[-1][2]-road_map[0][2])**2 + (road_map[-1][3]-road_map[0][3])**2)
 
     return total_distance
 
@@ -77,10 +77,10 @@ def shift_cities(road_map):
     to the position i+1. The city at the last position moves to the position
     0. Return the new road map. 
     """
-    road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311),
-                 ("Delaware", "Dover", 39.161921, -75.526755),
-                 ("Minnesota", "Saint Paul", 44.95, -93.094)]
-    return road_map1
+
+    road_map = road_map[-1:] + road_map[:-1]
+    return road_map
+
 
 
 def find_best_cycle(road_map):
@@ -115,6 +115,9 @@ if __name__ == "__main__":  # keep this in
     main()
 
 
-data = read_cities('city-data.txt')
 
-print(swap_cities(data,49,1))
+road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311),
+                ("Delaware", "Dover", 39.161921, -75.526755),
+                 ("Minnesota", "Saint Paul", 44.95, -93.094)]
+
+print(shift_cities(road_map1))

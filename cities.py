@@ -1,4 +1,6 @@
 from math import sqrt
+from random import randrange
+
 
 def read_cities(file_name):
     """
@@ -25,14 +27,15 @@ def read_cities(file_name):
 
     return roadmap
 
+
 def print_cities(road_map):
     """
     Prints a list of cities, along with their locations. 
     Print only one or two digits after the decimal point.
     """
-    
+
     lst = []
-    
+
     for element in road_map:
         city, lon, lat = element[1], element[2], element[3]
         lon, lat = round(lon, 2), round(lat, 2)
@@ -46,13 +49,15 @@ def compute_total_distance(road_map):
     the connections in the `road_map`. Remember that it's a cycle, so that 
     (for example) in the initial `road_map`, Wyoming connects to Alabama...
     """
-    
+
     total_distance = 0
 
     for i in range(0, len(road_map)-1):
-        total_distance += sqrt((road_map[i][2]-road_map[i+1][2])**2 + (road_map[i][3]-road_map[i+1][3])**2)
+        total_distance += sqrt((road_map[i][2]-road_map[i+1][2])
+                               ** 2 + (road_map[i][3]-road_map[i+1][3])**2)
 
-    total_distance += sqrt((road_map[-1][2]-road_map[0][2])**2 + (road_map[-1][3]-road_map[0][3])**2)
+    total_distance += sqrt((road_map[-1][2]-road_map[0][2])
+                           ** 2 + (road_map[-1][3]-road_map[0][3])**2)
 
     return total_distance
 
@@ -68,8 +73,9 @@ def swap_cities(road_map, index1, index2):
     Allow for the possibility that `index1=index2`,
     and handle this case correctly.
     """
-    road_map[index1],road_map[index2] = road_map[index2],road_map[index1]
+    road_map[index1], road_map[index2] = road_map[index2], road_map[index1]
     return (road_map, compute_total_distance(road_map))
+
 
 def shift_cities(road_map):
     """
@@ -82,7 +88,6 @@ def shift_cities(road_map):
     return road_map
 
 
-
 def find_best_cycle(road_map):
     """
     Using a combination of `swap_cities` and `shift_cities`, 
@@ -90,7 +95,18 @@ def find_best_cycle(road_map):
     After `10000` swaps/shifts, return the best cycle found so far.
     Use randomly generated indices for swapping.
     """
-    pass
+
+    best_route = compute_total_distance(road_map)
+
+    for i in range(0, 10001):
+        current_route = swap_cities(road_map, randrange(
+            len(road_map)), randrange(len(road_map)))
+        current_route = shift_cities(road_map)
+        current_route = compute_total_distance(road_map)
+        if current_route < best_route:
+            best_route = current_route
+
+    return best_route
 
 
 def print_map(road_map):
@@ -115,9 +131,18 @@ if __name__ == "__main__":  # keep this in
     main()
 
 
+road_map = [("Kentucky", "Frankfort", 38.197274, -84.86311),
+             ("Delaware", "Dover", 39.161921, -75.526755),
+             ("Minnesota", "Saint Paul", 44.95, -93.094)]
 
-road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311),
-                ("Delaware", "Dover", 39.161921, -75.526755),
-                 ("Minnesota", "Saint Paul", 44.95, -93.094)]
+# print(shift_cities(road_map1))
 
-print(shift_cities(road_map1))
+
+# print(randrange(len(road_map1)))
+print(compute_total_distance(road_map))
+
+
+
+print(swap_cities(road_map, randrange(len(road_map)), randrange(len(road_map))))
+print(shift_cities(road_map))
+print(compute_total_distance(road_map))

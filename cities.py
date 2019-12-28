@@ -1,5 +1,5 @@
 from math import sqrt
-from random import randrange
+import random
 
 
 def read_cities(file_name):
@@ -98,15 +98,11 @@ def find_best_cycle(road_map):
 
     best_route = compute_total_distance(road_map)
 
-    for i in range(0, 10001):
-        current_route = swap_cities(road_map, randrange(
-            len(road_map)), randrange(len(road_map)))
-        current_route = shift_cities(road_map)
-        current_route = compute_total_distance(road_map)
-        if current_route < best_route:
-            best_route = current_route
+    for i in range(0, 5):
+        route = swap_cities(road_map, randrange(0, len(road_map)-1),randrange(0, len(road_map)-1))
+        print(route)
 
-    return best_route
+ 
 
 
 def print_map(road_map):
@@ -131,18 +127,20 @@ if __name__ == "__main__":  # keep this in
     main()
 
 
-road_map = [("Kentucky", "Frankfort", 38.197274, -84.86311),
+road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311),
              ("Delaware", "Dover", 39.161921, -75.526755),
              ("Minnesota", "Saint Paul", 44.95, -93.094)]
 
-# print(shift_cities(road_map1))
+
+road_map = read_cities("city-data.txt")
 
 
-# print(randrange(len(road_map1)))
-print(compute_total_distance(road_map))
+best_route = compute_total_distance(road_map)
 
-
-
-print(swap_cities(road_map, randrange(len(road_map)), randrange(len(road_map))))
-print(shift_cities(road_map))
-print(compute_total_distance(road_map))
+for i in range(0, 10001):
+    swap_cities(road_map, random.randint(0, len(road_map)-1),random.randint(0, len(road_map)-1))
+    shift_cities(road_map)
+    if compute_total_distance((road_map)) < best_route:
+        best_route = compute_total_distance(road_map)
+    print(best_route)
+    

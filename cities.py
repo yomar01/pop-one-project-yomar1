@@ -98,12 +98,13 @@ def find_best_cycle(road_map):
 
     best_route = compute_total_distance(road_map)
 
-    for i in range(0, 5):
-        route = swap_cities(road_map, randrange(0, len(road_map)-1),randrange(0, len(road_map)-1))
-        print(route)
-
- 
-
+    for i in range(0, 10001):
+        swap_cities(road_map, random.randint(0, len(road_map)-1),random.randint(0, len(road_map)-1))
+        shift_cities(road_map)
+        if compute_total_distance((road_map)) < best_route:
+            best_route = compute_total_distance(road_map)
+    
+    return round(best_route, 2)
 
 def print_map(road_map):
     """
@@ -112,7 +113,12 @@ def print_map(road_map):
     their connections, along with the cost for each connection 
     and the total cost.
     """
-    pass
+    for i in range(0, len(road_map)):
+        cost = sqrt((road_map[i-1][2]-road_map[i][2])**2 + (road_map[i-1][3]-road_map[i][3])**2)
+        print(f"{i+1}) City: {road_map[i][1]}, State: {road_map[i][0]}, Cost: {round(cost,2)}")
+
+    total_cost = compute_total_distance(road_map)
+    print(f"Total Cost: {round(total_cost, 2)}")
 
 
 def main():
@@ -120,27 +126,17 @@ def main():
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
     """
-    pass
+    try:
+      read_cities("city-daa.txt")
+    except IOError:
+      print ("Error: File does not appear to exist.")
+
+    
 
 
 if __name__ == "__main__":  # keep this in
     main()
 
 
-road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311),
-             ("Delaware", "Dover", 39.161921, -75.526755),
-             ("Minnesota", "Saint Paul", 44.95, -93.094)]
 
 
-road_map = read_cities("city-data.txt")
-
-
-best_route = compute_total_distance(road_map)
-
-for i in range(0, 10001):
-    swap_cities(road_map, random.randint(0, len(road_map)-1),random.randint(0, len(road_map)-1))
-    shift_cities(road_map)
-    if compute_total_distance((road_map)) < best_route:
-        best_route = compute_total_distance(road_map)
-    print(best_route)
-    

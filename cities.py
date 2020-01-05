@@ -115,10 +115,10 @@ def print_map(road_map):
     """
     for i in range(0, len(road_map)):
         cost = sqrt((road_map[i-1][2]-road_map[i][2])**2 + (road_map[i-1][3]-road_map[i][3])**2)
-        print(f"{i+1}) City: {road_map[i][1]}, State: {road_map[i][0]}, Cost: {round(cost,2)}")
+        print(f"{i+1}) City: {road_map[i][1]}, State: {road_map[i][0]},\n The distance between {road_map[i-1][0]},{road_map[i-1][1]} and {road_map[i][0]},{road_map[i][1]} is {round(cost,2)}")
 
     total_cost = compute_total_distance(road_map)
-    print(f"Total Cost: {round(total_cost, 2)}")
+    print(f"Total distance: {round(total_cost, 2)}")
 
 
 def main():
@@ -127,15 +127,20 @@ def main():
     cycle and prints it out.
     """
     try:
-      read_cities("city-daa.txt")
+      road_map = read_cities("city-ata.txt")
     except IOError:
       print ("Error: File does not appear to exist.")
-
+    else:
+        find_best_cycle(road_map)
+        print_map(road_map)
+    
     
 
 
 if __name__ == "__main__":  # keep this in
     main()
+
+
 
 
 

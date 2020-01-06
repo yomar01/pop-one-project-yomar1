@@ -83,10 +83,13 @@ def shift_cities(road_map):
     to the position i+1. The city at the last position moves to the position
     0. Return the new road map. 
     """
+    
+    
+    item = road_map.pop()
+    road_map.insert(0, item)
 
-    road_map = road_map[-1:] + road_map[:-1]
     return road_map
-
+    
 
 def find_best_cycle(road_map):
     """
@@ -127,7 +130,7 @@ def main():
     cycle and prints it out.
     """
     try:
-      road_map = read_cities("city-ata.txt")
+      road_map = read_cities("city-data.txt")
     except IOError:
       print ("Error: File does not appear to exist.")
     else:
@@ -139,6 +142,9 @@ def main():
 
 if __name__ == "__main__":  # keep this in
     main()
+
+
+
 
 
 
